@@ -1,0 +1,152 @@
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('doc.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .login {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .login h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .login form {
+            margin-top: 30px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .mb-3 {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h1>Insurance Indicator</h1>
+        <form action="{{ url_for('predict_datapoint')}}" method="post">
+            <h1>
+                <legend>Insurance calculator model</legend>
+            </h1>
+            <div class="mb-3">
+                <label class="form-label">Write your Age</label>
+                <input class="form-control" type="number" name="age" placeholder="Enter your Age" min="1" max="100" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Gender or Sex</label>
+                <select class="form-control" name="sex" placeholder="Enter your gender" required>
+                    <option class="placeholder" selected disabled value="">Select Gender</option>
+                    <option value="female">female</option>
+                    <option value="male">male</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Body mass index</label>
+                <input class="form-control" type="float" name="bmi" placeholder="Enter your BMI" min="10" max="80" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Children</label>
+                <input class="form-control" type="number" name="Children" placeholder="Enter the number of children" min="0" max="10" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Smoking habit</label>
+                <select class="form-control" name="smoker" placeholder="Enter your choice" required>
+                    <option class="placeholder" selected disabled value="">Select habit</option>
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Region</label>
+                <select class="form-control" type="str" name="region" placeholder="Select Region" required>
+                    <option class="placeholder" selected disabled value="">Select Region</option>
+                    <option value="southwest">southwest</option>
+                    <option value="southeast">southeast</option>
+                    <option value="northwest">northwest</option>
+                    <option value="northeast">northeast</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Predict your Insurance charges" required />
+            </div>
+        </form>
+        <h2>
+            THE prediction is {{results}}
+        </h2>
+    </div>
+</body>
+</html>
